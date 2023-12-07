@@ -1,6 +1,8 @@
-name = "biome-discord-utils-bot"
+name = "discord-utils-bot"
 main = "src/index.ts"
 compatibility_date = "2023-11-21"
+
+node_compat = true
 
 # Variable bindings. These are arbitrary, plaintext strings (similar to environment variables)
 # Note: Use secrets to store sensitive data.

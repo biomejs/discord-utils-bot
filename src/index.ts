@@ -1,8 +1,8 @@
 import { type APIInteraction, InteractionResponseType } from 'discord-api-types/v10';
 import { PlatformAlgorithm, isValidRequest } from 'discord-verify';
+import { onTestSlashCommand } from './commands/test.js';
 import { reply } from './reply.js';
 import { isChatInputCommand, isMessageComponent, isPing } from './typeguards.js';
-
 export type Env = {
   publicKey: string;
 };
@@ -31,9 +31,10 @@ async function handleInteraction(interaction: APIInteraction, env: Env): Promise
   }
 
   if (isChatInputCommand(interaction)) {
-    return reply(InteractionResponseType.ChannelMessageWithSource, {
-      content: 'Hello world!',
-    });
+    switch (interaction.data.name) {
+      case 'test':
+        return onTestSlashCommand(interaction);
+    }
   }
 
   if (isMessageComponent(interaction)) {

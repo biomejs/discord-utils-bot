@@ -10,18 +10,25 @@
     "check:apply": "biome check --apply-unsafe .",
     "typecheck": "tsc",
     "deploy": "wrangler deploy",
+    "deploy-commands": "tsx --env-file=.env scripts/deploy-commands.ts",
     "dev": "wrangler dev",
     "start": "wrangler dev"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.4.1",
     "@cloudflare/workers-types": "^4.20231121.0",
+    "tsx": "^4.6.2",
     "typescript": "^5.3.3",
     "wrangler": "^3.19.0"
   },
   "dependencies": {
+    "@discordjs/builders": "^1.7.0",
+    "@discordjs/rest": "^2.2.0",
     "discord-api-types": "^0.37.66",
     "discord-verify": "^1.2.0"
+  },
+  "engines": {
+    "node": ">=21.2.0"
   },
   "packageManager": "pnpm@8.11.0"
 }
