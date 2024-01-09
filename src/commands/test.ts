@@ -8,4 +8,6 @@ export async function onTestSlashCommand(interaction: APIApplicationCommandInter
   });
 }
 
-export const slashCommandData = new SlashCommandBuilder().setName('test').setDescription('biome bot test');
+export const slashCommandData = new SlashCommandBuilder()
+  .setName('test')
+  .setDescription('quick test. if this command doesnt work the bot is likely dead');

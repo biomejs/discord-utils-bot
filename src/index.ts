@@ -1,5 +1,7 @@
 import { type APIInteraction, InteractionResponseType } from 'discord-api-types/v10';
 import { PlatformAlgorithm, isValidRequest } from 'discord-verify';
+import { onPluginsSlashCommand } from './commands/arewepluginsyet.js';
+import { onSupportedLanguagesSlashCommand } from './commands/supported-languages.js';
 import { onTestSlashCommand } from './commands/test.js';
 import { reply } from './reply.js';
 import { isChatInputCommand, isMessageComponent, isPing } from './typeguards.js';
@@ -32,6 +34,10 @@ async function handleInteraction(interaction: APIInteraction, env: Env): Promise
 
   if (isChatInputCommand(interaction)) {
     switch (interaction.data.name) {
+      case 'arewepluginsyet':
+        return onPluginsSlashCommand(interaction);
+      case 'supported-languages':
+        return onSupportedLanguagesSlashCommand(interaction);
       case 'test':
         return onTestSlashCommand(interaction);
     }
