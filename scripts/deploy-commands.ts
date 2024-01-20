@@ -21,7 +21,6 @@ interface CommandFile {
   slashCommandData: SlashCommandBuilder;
 }
 
-// @ts-expect-error: import.meta.dirname was recently added in node 21.2.0
 const directory = join(import.meta.dirname, '../src/commands');
 const files = await readdir(directory);
 
