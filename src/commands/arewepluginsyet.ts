@@ -9,7 +9,7 @@ export async function onPluginsSlashCommand(interaction: APIApplicationCommandIn
     ⚠️ **In roadmap**
     There is no support for plugins yet, but it is planned for the future.
 
-    There is a [Biome Plugins Proposal RFC](https://github.com/biomejs/biome/discussions/1762) that aims to guide our implementation work.
+    There is a [Biome Plugins Proposal RFC](<https://github.com/biomejs/biome/discussions/1762>) that aims to guide our implementation work.
 
     We want to support the following use cases:
 
@@ -19,7 +19,7 @@ export async function onPluginsSlashCommand(interaction: APIApplicationCommandIn
     - Codemods
     - A query engine
 
-    Specifically, we want to unlock these use cases through a combination of [GritQL](https://docs.grit.io/tutorials/gritql) plugins and JS/TS plugins.
+    Specifically, we want to explore these use cases through a combination of [GritQL](<https://docs.grit.io/tutorials/gritql>) plugins and/or JS/TS plugins.
     `,
   });
 }
