@@ -9,17 +9,17 @@ export async function onPluginsSlashCommand(interaction: APIApplicationCommandIn
     ⚠️ **In roadmap**
     There is no support for plugins yet, but it is planned for the future.
 
-    From the [2024 roadmap](https://biomejs.dev/blog/roadmap-2024/):
-    >>> ### Plugins
-    We will explore plugins and come up with a design that fits Biome. Biome is different from other tools because Biome is a toolchain that has multiple tools in it, so we have to think out of the box and propose a design that might differ from the tools people are used to.
+    There is a [Biome Plugins Proposal RFC](<https://github.com/biomejs/biome/discussions/1762>) that aims to guide our implementation work.
 
-    We don't know yet what a Biome's plugin will look like, although a plugin should be able to tap all the tools that Biome offers.
+    We want to support the following use cases:
 
-    Some ideas that we will consider:
+    - Linter plugins
+    - Formatter plugins
+    - Transformation plugins
+    - Codemods
+    - A query engine
 
-    - DSL
-    - WASM
-    - A Runtime
+    Specifically, we want to explore these use cases through a combination of [GritQL](<https://docs.grit.io/tutorials/gritql>) plugins and/or JS/TS plugins.
     `,
   });
 }
