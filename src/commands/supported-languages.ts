@@ -8,10 +8,13 @@ export async function onSupportedLanguagesSlashCommand(interaction: APIApplicati
     content: dedent`
     ### ✅ Full Support
     JavaScript, TypeScript, JSX, JSON, JSONC
+    ### ⚠️ Partial Support
+    [Astro, Vue, Svelte](<https://github.com/biomejs/biome/issues/1719>) (Embedded JS only)
     ### ⏳ Working on it!
     [CSS](<https://github.com/biomejs/biome/issues/1285>)
     ### ❓ Not yet
-    HTML, Vue, Svelte, Markdown
+    HTML, Markdown
+    Astro, Vue, Svelte (Full language support)
 
     For more info check <https://biomejs.dev/internals/language-support>
     `,
