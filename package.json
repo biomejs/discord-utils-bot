@@ -24,7 +24,7 @@
   "dependencies": {
     "@discordjs/builders": "^1.7.0",
     "@discordjs/rest": "^2.2.0",
-    "discord-api-types": "^0.37.70",
+    "discord-api-types": "^0.37.71",
     "discord-verify": "^1.2.0",
     "ts-dedent": "^2.2.0"
   },
