@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from '@discordjs/builders';
+import dedent from 'dedent';
 import { type APIApplicationCommandInteraction, InteractionResponseType } from 'discord-api-types/v10';
-import { dedent } from 'ts-dedent';
 import { reply } from '../reply.js';
 
 export async function onPluginsSlashCommand(interaction: APIApplicationCommandInteraction) {

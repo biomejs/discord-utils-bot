@@ -16,20 +16,20 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.5.3",
-    "@cloudflare/workers-types": "^4.20240208.0",
+    "@cloudflare/workers-types": "^4.20240222.0",
     "tsx": "^4.7.1",
-    "typescript": "^5.3.3",
-    "wrangler": "^3.28.2"
+    "typescript": "^5.4.2",
+    "wrangler": "^3.31.0"
   },
   "dependencies": {
     "@discordjs/builders": "^1.7.0",
     "@discordjs/rest": "^2.2.0",
-    "discord-api-types": "^0.37.70",
-    "discord-verify": "^1.2.0",
-    "ts-dedent": "^2.2.0"
+    "dedent": "^1.5.1",
+    "discord-api-types": "^0.37.71",
+    "discord-verify": "^1.2.0"
   },
   "engines": {
     "node": ">=21.2.0"
   },
-  "packageManager": "pnpm@8.14.1"
+  "packageManager": "pnpm@8.15.4"
 }

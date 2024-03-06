@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from '@discordjs/builders';
+import dedent from 'dedent';
 import { type APIApplicationCommandInteraction, InteractionResponseType } from 'discord-api-types/v10';
-import { dedent } from 'ts-dedent';
 import { reply } from '../reply.js';
 
 export async function onSupportedLanguagesSlashCommand(interaction: APIApplicationCommandInteraction) {
@@ -11,7 +11,7 @@ export async function onSupportedLanguagesSlashCommand(interaction: APIApplicati
     ### ⚠️ Partial Support
     [Astro, Vue, Svelte](<https://github.com/biomejs/biome/issues/1719>) (Embedded JS only)
     ### ⏳ Working on it!
-    [CSS](<https://github.com/biomejs/biome/issues/1285>)
+    [CSS](<https://github.com/biomejs/biome/issues/1285>), [GraphQL](<https://github.com/biomejs/biome/issues/1927>)
     ### ❓ Not yet
     HTML, Markdown
     Astro, Vue, Svelte (Full language support)
