@@ -1,4 +1,4 @@
-import { type APIInteractionResponseCallbackData, InteractionResponseType } from 'discord-api-types/v10';
+import type { APIInteractionResponseCallbackData, InteractionResponseType } from 'discord-api-types/v10';
 
 function respond(value: unknown) {
   const json = JSON.stringify(value);
