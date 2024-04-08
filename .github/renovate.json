@@ -9,9 +9,9 @@
   },
   "assignees": ["@biomejs/maintainers", "@biomejs/core-contributors"],
   "packageRules": [
-	  {
-	    "groupName": "github-actions",
-	    "matchManagers": ["github-actions"]
+    {
+      "groupName": "github-actions",
+      "matchManagers": ["github-actions"]
     },
     {
       "groupName": "Website",
