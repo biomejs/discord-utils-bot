@@ -5,7 +5,7 @@
   "extends": ["config:best-practices"],
   "rangeStrategy": "bump",
   "lockFileMaintenance": {
-    "enabled": false
+    "enabled": true
   },
   "packageRules": [
     {
