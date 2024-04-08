@@ -15,7 +15,8 @@
     {
       "groupName": "deps",
       "matchFileNames": ["package.json"],
-      "matchManagers": ["npm"]
+      "matchManagers": ["npm"],
+      "rangeStrategy": "bump"
     }
   ]
 }
