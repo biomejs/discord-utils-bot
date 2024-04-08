@@ -7,14 +7,13 @@
   "lockFileMaintenance": {
     "enabled": false
   },
-  "assignees": ["@biomejs/maintainers", "@biomejs/core-contributors"],
   "packageRules": [
     {
       "groupName": "github-actions",
       "matchManagers": ["github-actions"]
     },
     {
-      "groupName": "Website",
+      "groupName": "deps",
       "matchFileNames": ["package.json"],
       "matchManagers": ["npm"]
     }
