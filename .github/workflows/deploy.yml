@@ -52,6 +52,12 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v3
 
+      - name: Install Node 20
+        uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
       # The wrangler action normally installs a hardcoded version of wrangler.
       # This step gets the version we use from package.json.
       # See https://github.com/cloudflare/wrangler-action/issues/231#issuecomment-1976018383.
