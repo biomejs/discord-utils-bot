@@ -11,10 +11,10 @@ on:
       - 'wrangler.toml'
 
 jobs:
-  deploy-commands:
-    name: Deploy Commands
+  deploy:
+    name: Deploy Commands & Worker
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 60
     steps:
       - name: Checkout repository
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
@@ -39,24 +39,6 @@ jobs:
         env:
           APPLICATION_ID: ${{ secrets.APPLICATION_ID }}
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
-
-  deploy-worker:
-    name: Deploy Worker
-    runs-on: ubuntu-latest
-    timeout-minutes: 60
-    needs: [deploy-commands]
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v3
-
-      - name: Install Node 20
-        uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4
-        with:
-          node-version: 20
-          cache: 'pnpm'
 
       # The wrangler action normally installs a hardcoded version of wrangler.
       # This step gets the version we use from package.json.
