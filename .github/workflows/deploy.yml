@@ -40,7 +40,12 @@ jobs:
     timeout-minutes: 60
     needs: [deploy-commands]
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+
       - name: Build & Deploy Worker
         uses: cloudflare/wrangler-action@v3
         with:
