@@ -6,7 +6,7 @@ import { onTestSlashCommand } from './commands/test.js';
 import { reply } from './reply.js';
 import { isChatInputCommand, isMessageComponent, isPing } from './typeguards.js';
 export type Env = {
-  publicKey: string;
+  PUBLIC_KEY: string;
 };
 
 export default {
@@ -17,7 +17,7 @@ export default {
     }
 
     // Check if the request is valid
-    const isValid = await isValidRequest(request, env.publicKey, PlatformAlgorithm.Cloudflare).catch(() => false);
+    const isValid = await isValidRequest(request, env.PUBLIC_KEY, PlatformAlgorithm.Cloudflare).catch(() => false);
     if (!isValid) {
       return new Response('Invalid signature', { status: 401 });
     }

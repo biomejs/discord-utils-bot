@@ -5,14 +5,14 @@
   "type": "module",
   "license": "MIT OR Apache-2.0",
   "scripts": {
-    "format": "biome format --write .",
-    "check": "biome check .",
-    "check:apply": "biome check --apply-unsafe .",
-    "typecheck": "tsc",
+    "dev": "wrangler dev",
+    "start": "wrangler dev",
     "deploy": "wrangler deploy",
     "deploy-commands": "tsx --env-file=.env scripts/deploy-commands.ts",
-    "dev": "wrangler dev",
-    "start": "wrangler dev"
+    "check": "biome check .",
+    "check:apply": "biome check --apply-unsafe .",
+    "format": "biome format --write .",
+    "typecheck": "tsc"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.7.0",
