@@ -3,6 +3,12 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'scripts/**'
+      - 'src/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - 'wrangler.toml'
 
 jobs:
   deploy-commands:
@@ -46,11 +52,19 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v3
 
+      # The wrangler action normally installs a hardcoded version of wrangler.
+      # This step gets the version we use from package.json.
+      # See https://github.com/cloudflare/wrangler-action/issues/231#issuecomment-1976018383.
+      - name: Set wrangler version
+        id: wrangler
+        run: echo "version=$(jq -r .devDependencies.wrangler package.json | cut -c2-)" >> "$GITHUB_OUTPUT"
+
       - name: Build & Deploy Worker
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          wranglerVersion: ${{ steps.wrangler.outputs.version }}
           secrets: |
             PUBLIC_KEY
         env:
