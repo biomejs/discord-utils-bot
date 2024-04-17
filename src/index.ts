@@ -3,9 +3,9 @@ import { PlatformAlgorithm, isValidRequest } from 'discord-verify';
 import { onPluginsSlashCommand } from './commands/arewepluginsyet.js';
 import { onSupportedLanguagesSlashCommand } from './commands/supported-languages.js';
 import { onTestSlashCommand } from './commands/test.js';
+import { handleGitHubWebhook } from './gh-webhook/github.js';
 import { reply } from './reply.js';
 import { isChatInputCommand, isMessageComponent, isPing } from './typeguards.js';
-import { handleGitHubWebhook } from './gh-webhook/github.js';
 export type Env = {
   PUBLIC_KEY: string;
 };

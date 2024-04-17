@@ -1,4 +1,4 @@
-import crypto from 'crypto';
+import crypto from 'node:crypto';
 import type { Env } from '..';
 
 export async function handleGitHubWebhook(request: Request, env: Env): Promise<Response> {
