@@ -8,6 +8,8 @@ import { reply } from './reply.js';
 import { isChatInputCommand, isMessageComponent, isPing } from './typeguards.js';
 export type Env = {
   PUBLIC_KEY: string;
+  DISCORD_WEBHOOK: string;
+  GITHUB_SECRET: string;
 };
 
 export default {
