@@ -5,7 +5,7 @@ export async function handleGitHubWebhook(request: Request, env: Env): Promise<R
     return new Response('Method not allowed', { status: 405, statusText: 'Method Not Allowed' });
   }
 
-  const githubSecret = env.GITHUB_SECRET;
+  const githubSecret = env.WEBHOOK_SECRET;
   const webhookUrl = env.DISCORD_WEBHOOK;
 
   if (!githubSecret || !webhookUrl) {

@@ -54,6 +54,10 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           wranglerVersion: ${{ steps.wrangler.outputs.version }}
           secrets: |
+            DISCORD_WEBHOOK
             PUBLIC_KEY
+            WEBHOOK_SECRET
         env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           PUBLIC_KEY: ${{ secrets.PUBLIC_KEY }}
+          WEBHOOK_SECRET: ${{ secrets.WEBHOOK_SECRET }}
