@@ -106,7 +106,7 @@ async function sendToWebhook(json: unknown, headers: Headers, webhookUrl: string
     const response = await fetch(webhookUrl, {
       method: 'POST',
       headers: forwardHeaders,
-      body: json as BodyInit,
+      body: JSON.stringify(json),
     });
 
     return response.ok;
