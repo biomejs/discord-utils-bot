@@ -1,4 +1,3 @@
-import crypto from 'node:crypto';
 import type { Env } from '..';
 
 export async function handleGitHubWebhook(request: Request, env: Env): Promise<Response> {
@@ -35,9 +34,9 @@ export async function handleGitHubWebhook(request: Request, env: Env): Promise<R
 }
 
 async function isAuthorized(request: Request, githubSecret: string): Promise<boolean> {
-  const headerSignature = request.headers.get('x-hub-signature-256');
+  const untrustedSignature = request.headers.get('x-hub-signature-256');
 
-  if (headerSignature == null) {
+  if (untrustedSignature == null) {
     return false;
   }
 
@@ -47,17 +46,22 @@ async function isAuthorized(request: Request, githubSecret: string): Promise<boo
     return false;
   }
 
-  const split = headerSignature.split('=')[1];
+  const encoder = new TextEncoder();
 
-  if (!split) {
-    return false;
-  }
+  const data = encoder.encode(bodyText);
+  const secret = encoder.encode(githubSecret);
 
-  const calculatedSignature = crypto.createHmac('sha256', githubSecret).update(bodyText).digest('hex');
-  const trusted = Buffer.from(`sha256=${calculatedSignature}`);
-  const untrusted = Buffer.from(headerSignature);
+  const key = await crypto.subtle.importKey('raw', secret, { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
+  const signature = await crypto.subtle.sign('HMAC', key, data);
 
-  return crypto.timingSafeEqual(trusted, untrusted);
+  const hexSignature = Array.from(new Uint8Array(signature))
+    .map((byte) => byte.toString(16).padStart(2, '0'))
+    .join('');
+
+  const trusted = encoder.encode(`sha256=${hexSignature}`);
+  const untrusted = encoder.encode(untrustedSignature);
+
+  return crypto.subtle.timingSafeEqual(trusted, untrusted);
 }
 
 async function isHumanEvent(request: Request): Promise<boolean> {
