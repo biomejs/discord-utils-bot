@@ -12,19 +12,32 @@ export async function handleGitHubWebhook(request: Request, env: Env): Promise<R
     return new Response('Internal server error', { status: 500, statusText: 'Internal Server Error' });
   }
 
-  const authorized = await isAuthorized(request, githubSecret);
+  const bodyText = await request.text().catch(() => null);
+  const headers = request.headers;
+
+  if (bodyText == null) {
+    return new Response('Failed to read request body', { status: 400, statusText: 'Bad Request' });
+  }
+
+  const authorized = await isAuthorized(headers, bodyText, githubSecret);
 
   if (!authorized) {
     return new Response('Unauthorized', { status: 401, statusText: 'Unauthorized' });
   }
 
-  const isHuman = await isHumanEvent(request);
+  const json = JSON.parse(bodyText).catch(() => null);
+
+  if (json == null) {
+    return new Response('Failed to parse request body', { status: 400, statusText: 'Bad Request' });
+  }
+
+  const isHuman = await isHumanEvent(json);
 
   if (!isHuman) {
     return new Response('Event skipped', { status: 200, statusText: 'OK' });
   }
 
-  const sent = await sendToWebhook(request, webhookUrl);
+  const sent = await sendToWebhook(json, headers, webhookUrl);
 
   if (!sent) {
     return new Response('Failed to send to Discord', { status: 500, statusText: 'Internal Server Error' });
@@ -33,16 +46,10 @@ export async function handleGitHubWebhook(request: Request, env: Env): Promise<R
   return new Response('Event processed', { status: 200, statusText: 'OK' });
 }
 
-async function isAuthorized(request: Request, githubSecret: string): Promise<boolean> {
-  const untrustedSignature = request.headers.get('x-hub-signature-256');
+async function isAuthorized(headers: Headers, bodyText: string, githubSecret: string): Promise<boolean> {
+  const untrustedSignature = headers.get('x-hub-signature-256');
 
   if (untrustedSignature == null) {
-    return false;
-  }
-
-  const bodyText = await request.text().catch(() => null);
-
-  if (bodyText == null) {
     return false;
   }
 
@@ -64,9 +71,7 @@ async function isAuthorized(request: Request, githubSecret: string): Promise<boo
   return crypto.subtle.timingSafeEqual(trusted, untrusted);
 }
 
-async function isHumanEvent(request: Request): Promise<boolean> {
-  const json = await request.json();
-
+async function isHumanEvent(json: unknown): Promise<boolean> {
   return (
     json !== null &&
     json !== undefined &&
@@ -83,8 +88,7 @@ async function isHumanEvent(request: Request): Promise<boolean> {
   );
 }
 
-async function sendToWebhook(request: Request, webhookUrl: string): Promise<boolean> {
-  const headers = request.headers;
+async function sendToWebhook(json: unknown, headers: Headers, webhookUrl: string): Promise<boolean> {
   const forwardHeaders = new Headers();
 
   for (const [key, value] of headers) {
@@ -97,7 +101,7 @@ async function sendToWebhook(request: Request, webhookUrl: string): Promise<bool
     const response = await fetch(webhookUrl, {
       method: 'POST',
       headers: forwardHeaders,
-      body: request.body,
+      body: json as BodyInit,
     });
 
     return response.ok;
