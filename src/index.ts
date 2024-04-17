@@ -5,27 +5,38 @@ import { onSupportedLanguagesSlashCommand } from './commands/supported-languages
 import { onTestSlashCommand } from './commands/test.js';
 import { reply } from './reply.js';
 import { isChatInputCommand, isMessageComponent, isPing } from './typeguards.js';
+import { handleGitHubWebhook } from './gh-webhook/github.js';
 export type Env = {
   PUBLIC_KEY: string;
 };
 
 export default {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
-    // Check if the request has the required headers
-    if (!request.headers.get('X-Signature-Ed25519') || !request.headers.get('X-Signature-Timestamp')) {
-      return Response.redirect('https://biomejs.dev');
-    }
+    const url = new URL(request.url);
 
-    // Check if the request is valid
-    const isValid = await isValidRequest(request, env.PUBLIC_KEY, PlatformAlgorithm.Cloudflare).catch(() => false);
-    if (!isValid) {
-      return new Response('Invalid signature', { status: 401 });
+    // Route requests based on the URL path
+    switch (url.pathname) {
+      case '/github':
+        return handleGitHubWebhook(request, env);
+      default:
+        return handleDiscordInteraction(request, env);
     }
-
-    const interaction = await request.json<APIInteraction>();
-    return handleInteraction(interaction, env);
   },
 };
+
+async function handleDiscordInteraction(request: Request, env: Env): Promise<Response> {
+  if (!request.headers.get('X-Signature-Ed25519') || !request.headers.get('X-Signature-Timestamp')) {
+    return Response.redirect('https://biomejs.dev');
+  }
+
+  const isValid = await isValidRequest(request, env.PUBLIC_KEY, PlatformAlgorithm.Cloudflare).catch(() => false);
+  if (!isValid) {
+    return new Response('Invalid signature', { status: 401 });
+  }
+
+  const interaction = await request.json<APIInteraction>();
+  return handleInteraction(interaction, env);
+}
 
 async function handleInteraction(interaction: APIInteraction, env: Env): Promise<Response> {
   if (isPing(interaction)) {
