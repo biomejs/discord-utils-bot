@@ -6,10 +6,10 @@ export async function handleGitHubWebhook(request: Request, env: Env): Promise<R
     return new Response('Method not allowed', { status: 405, statusText: 'Method Not Allowed' });
   }
 
-  const githubSecret = process.env.GITHUB_SECRET;
-  const WebhookURL = process.env.WEBHOOK_URL;
+  const githubSecret = env.GITHUB_SECRET;
+  const webhookUrl = env.DISCORD_WEBHOOK;
 
-  if (!githubSecret || !WebhookURL) {
+  if (!githubSecret || !webhookUrl) {
     return new Response('Internal server error', { status: 500, statusText: 'Internal Server Error' });
   }
 
@@ -25,7 +25,7 @@ export async function handleGitHubWebhook(request: Request, env: Env): Promise<R
     return new Response('Event skipped', { status: 200, statusText: 'OK' });
   }
 
-  const sent = await sendToWebhook(request);
+  const sent = await sendToWebhook(request, webhookUrl);
 
   if (!sent) {
     return new Response('Failed to send to Discord', { status: 500, statusText: 'Internal Server Error' });
@@ -35,9 +35,9 @@ export async function handleGitHubWebhook(request: Request, env: Env): Promise<R
 }
 
 async function isAuthorized(request: Request, githubSecret: string): Promise<boolean> {
-  const header_signature = request.headers.get('x-hub-signature-256');
+  const headerSignature = request.headers.get('x-hub-signature-256');
 
-  if (header_signature == null) {
+  if (headerSignature == null) {
     return false;
   }
 
@@ -47,7 +47,7 @@ async function isAuthorized(request: Request, githubSecret: string): Promise<boo
     return false;
   }
 
-  const split = header_signature.split('=')[1];
+  const split = headerSignature.split('=')[1];
 
   if (!split) {
     return false;
@@ -55,7 +55,7 @@ async function isAuthorized(request: Request, githubSecret: string): Promise<boo
 
   const calculatedSignature = crypto.createHmac('sha256', githubSecret).update(bodyText).digest('hex');
   const trusted = Buffer.from(`sha256=${calculatedSignature}`);
-  const untrusted = Buffer.from(header_signature);
+  const untrusted = Buffer.from(headerSignature);
 
   return crypto.timingSafeEqual(trusted, untrusted);
 }
@@ -79,7 +79,7 @@ async function isHumanEvent(request: Request): Promise<boolean> {
   );
 }
 
-async function sendToWebhook(request: Request): Promise<boolean> {
+async function sendToWebhook(request: Request, webhookUrl: string): Promise<boolean> {
   const headers = request.headers;
   const forwardHeaders = new Headers();
 
@@ -90,7 +90,7 @@ async function sendToWebhook(request: Request): Promise<boolean> {
   }
 
   try {
-    const response = await fetch(process.env.DISCORD_WEBHOOK, {
+    const response = await fetch(webhookUrl, {
       method: 'POST',
       headers: forwardHeaders,
       body: request.body,
