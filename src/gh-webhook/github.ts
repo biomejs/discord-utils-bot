@@ -25,7 +25,12 @@ export async function handleGitHubWebhook(request: Request, env: Env): Promise<R
     return new Response('Unauthorized', { status: 401, statusText: 'Unauthorized' });
   }
 
-  const json = JSON.parse(bodyText).catch(() => null);
+  let json: unknown | null;
+  try {
+    json = JSON.parse(bodyText);
+  } catch {
+    json = null;
+  }
 
   if (json == null) {
     return new Response('Failed to parse request body', { status: 400, statusText: 'Bad Request' });
