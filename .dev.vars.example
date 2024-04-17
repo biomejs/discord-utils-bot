@@ -1,0 +1,6 @@
+APPLICATION_ID=""
+DISCORD_TOKEN=""
+# make sure to append /github to the end of the webhook URL
+DISCORD_WEBHOOK=""
+PUBLIC_KEY=""
+WEBHOOK_SECRET=""

@@ -31,8 +31,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Create empty .env file
-        run: touch .env
+      - name: Create empty .dev.vars file
+        run: touch .dev.vars
 
       - name: Deploy commands to Discord
         run: pnpm run deploy-commands

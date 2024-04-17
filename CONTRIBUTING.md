@@ -27,12 +27,14 @@ First, create an application on the [Discord Developer Portal](https://discord.c
 
 It will be a used as a test application for development purposes of the bot.
 
-Then, create a `.env` file at the root of the project with the following variables obtained from the dev portal:
+Then, create a `.dev.vars` file at the root of the project with the following variables obtained from the dev portal:
 
 ```env
 APPLICATION_ID=
 DISCORD_TOKEN=
+DISCORD_WEBHOOK=
 PUBLIC_KEY=
+WEBHOOK_SECRET=
 ```
 
 ### Running the Bot

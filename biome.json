@@ -19,7 +19,19 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true
+      "recommended": true,
+      "correctness": {
+        "noUnusedImports": "error"
+      },
+      "style": {
+        "noNegationElse": "error",
+        "useBlockStatements": "error",
+        "useConsistentArrayType": "error",
+        "useFilenamingConvention": "error",
+        "useForOf": "error",
+        "useShorthandAssign": "error",
+        "useShorthandArrayType": "error"
+      }
     }
   },
   "organizeImports": {

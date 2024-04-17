@@ -2,57 +2,52 @@ import type { Env } from '..';
 
 export async function handleGitHubWebhook(request: Request, env: Env): Promise<Response> {
   if (request.method !== 'POST') {
-    return new Response('Method not allowed', { status: 405, statusText: 'Method Not Allowed' });
+    return new Response('Method not allowed', { status: 405 });
   }
 
   const githubSecret = env.WEBHOOK_SECRET;
   const webhookUrl = env.DISCORD_WEBHOOK;
 
   if (!githubSecret || !webhookUrl) {
-    return new Response('Internal server error', { status: 500, statusText: 'Internal Server Error' });
+    return new Response('Internal server error', { status: 500 });
   }
 
   const bodyText = await request.text().catch(() => null);
-  const headers = request.headers;
 
-  if (bodyText == null) {
-    return new Response('Failed to read request body', { status: 400, statusText: 'Bad Request' });
+  if (!bodyText) {
+    return new Response('Failed to read request body', { status: 400 });
   }
 
-  const authorized = await isAuthorized(headers, bodyText, githubSecret);
+  const authorized = await isAuthorized(request.headers, bodyText, githubSecret);
 
   if (!authorized) {
-    return new Response('Unauthorized', { status: 401, statusText: 'Unauthorized' });
+    return new Response('Unauthorized', { status: 401 });
   }
 
-  let json: unknown | null;
+  let json: unknown;
   try {
     json = JSON.parse(bodyText);
   } catch {
-    json = null;
-  }
-
-  if (json == null) {
-    return new Response('Failed to parse request body', { status: 400, statusText: 'Bad Request' });
+    return new Response('Failed to parse request body', { status: 400 });
   }
 
   const isHuman = await isHumanEvent(json);
 
   if (!isHuman) {
-    return new Response('Event skipped', { status: 200, statusText: 'OK' });
+    return new Response('Webhook event triggered by bot, skipped', { status: 200 });
   }
 
-  const sent = await sendToWebhook(json, headers, webhookUrl);
+  const sent = await sendToWebhook(bodyText, request.headers, webhookUrl);
 
   if (!sent) {
-    return new Response('Failed to send to Discord', { status: 500, statusText: 'Internal Server Error' });
+    return new Response('Failed to send to Discord', { status: 500 });
   }
 
-  return new Response('Event processed', { status: 200, statusText: 'OK' });
+  return new Response('Event processed', { status: 200 });
 }
 
 async function isAuthorized(headers: Headers, bodyText: string, githubSecret: string): Promise<boolean> {
-  const untrustedSignature = headers.get('x-hub-signature-256');
+  const untrustedSignature = headers.get('X-Hub-Signature-256');
 
   if (untrustedSignature == null) {
     return false;
@@ -93,7 +88,7 @@ async function isHumanEvent(json: unknown): Promise<boolean> {
   );
 }
 
-async function sendToWebhook(json: unknown, headers: Headers, webhookUrl: string): Promise<boolean> {
+async function sendToWebhook(body: string, headers: Headers, webhookUrl: string): Promise<boolean> {
   const forwardHeaders = new Headers();
 
   for (const [key, value] of headers) {
@@ -106,7 +101,7 @@ async function sendToWebhook(json: unknown, headers: Headers, webhookUrl: string
     const response = await fetch(webhookUrl, {
       method: 'POST',
       headers: forwardHeaders,
-      body: JSON.stringify(json),
+      body,
     });
 
     return response.ok;

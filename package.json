@@ -8,10 +8,11 @@
     "dev": "wrangler dev",
     "start": "wrangler dev",
     "deploy": "wrangler deploy",
-    "deploy-commands": "tsx --env-file=.env scripts/deploy-commands.ts",
+    "deploy-commands": "tsx --env-file=.dev.vars scripts/deploy-commands.ts",
     "check": "biome check .",
     "check:apply": "biome check --apply-unsafe .",
     "format": "biome format --write .",
+    "lint": "biome lint .",
     "typecheck": "tsc"
   },
   "devDependencies": {

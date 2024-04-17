@@ -21,12 +21,12 @@ export default {
       case '/github':
         return handleGitHubWebhook(request, env);
       default:
-        return handleDiscordInteraction(request, env);
+        return handleInteraction(request, env);
     }
   },
 };
 
-async function handleDiscordInteraction(request: Request, env: Env): Promise<Response> {
+async function handleInteraction(request: Request, env: Env): Promise<Response> {
   if (!request.headers.get('X-Signature-Ed25519') || !request.headers.get('X-Signature-Timestamp')) {
     return Response.redirect('https://biomejs.dev');
   }
@@ -37,10 +37,7 @@ async function handleDiscordInteraction(request: Request, env: Env): Promise<Res
   }
 
   const interaction = await request.json<APIInteraction>();
-  return handleInteraction(interaction, env);
-}
 
-async function handleInteraction(interaction: APIInteraction, env: Env): Promise<Response> {
   if (isPing(interaction)) {
     return reply(InteractionResponseType.Pong);
   }
