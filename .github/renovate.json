@@ -14,7 +14,7 @@
     },
     {
       "groupName": "deps",
-      "matchManagers": ["npm", "regex"],
+      "matchManagers": ["npm"],
       "rangeStrategy": "bump"
     }
   ]
