@@ -1,8 +1,13 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "timezone": "Europe/Gibraltar",
-  "schedule": ["before 9am on monday"],
-  "extends": ["config:best-practices", "regexManagers:biomeVersions"],
+  "schedule": [
+    "before 9am on monday"
+  ],
+  "extends": [
+    "config:best-practices",
+    "regexManagers:biomeVersions"
+  ],
   "rangeStrategy": "bump",
   "lockFileMaintenance": {
     "enabled": true
@@ -10,11 +15,16 @@
   "packageRules": [
     {
       "groupName": "github-actions",
-      "matchManagers": ["github-actions"]
+      "matchManagers": [
+        "github-actions"
+      ]
     },
     {
       "groupName": "deps",
-      "matchManagers": ["npm", "regex"],
+      "matchManagers": [
+        "npm",
+        "custom.regex"
+      ],
       "rangeStrategy": "bump"
     }
   ]
