@@ -2,7 +2,7 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "timezone": "Europe/Gibraltar",
   "schedule": ["before 9am on monday"],
-  "extends": ["config:best-practices", "regexManagers:biomeVersions"],
+  "extends": ["config:best-practices", "helpers:pinGitHubActionDigestsToSemver", "regexManagers:biomeVersions"],
   "rangeStrategy": "bump",
   "lockFileMaintenance": {
     "enabled": true
