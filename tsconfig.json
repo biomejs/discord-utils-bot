@@ -6,7 +6,7 @@
 
     "target": "esnext",
 
-    "types": ["@cloudflare/workers-types/2023-07-01"],
+    "types": ["@cloudflare/workers-types"],
     "esModuleInterop": true,
     "checkJs": true,
     "resolveJsonModule": true,
