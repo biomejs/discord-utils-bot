@@ -1,11 +1,13 @@
 import { type APIInteraction, InteractionResponseType } from 'discord-api-types/v10';
 import { PlatformAlgorithm, isValidRequest } from 'discord-verify';
 import { onPluginsSlashCommand } from './commands/arewepluginsyet.js';
+import { onLintRuleAutocomplete, onLintRuleSlashCommand } from './commands/lint-rule.js';
 import { onSupportedLanguagesSlashCommand } from './commands/supported-languages.js';
 import { onTestSlashCommand } from './commands/test.js';
 import { handleGitHubWebhook } from './gh-webhook/github.js';
 import { reply } from './reply.js';
-import { isChatInputCommand, isMessageComponent, isPing } from './typeguards.js';
+import { isAutocomplete, isChatInputCommand, isMessageComponent, isPing } from './typeguards.js';
+
 export type Env = {
   PUBLIC_KEY: string;
   DISCORD_WEBHOOK: string;
@@ -46,10 +48,19 @@ async function handleInteraction(request: Request, env: Env): Promise<Response> 
     switch (interaction.data.name) {
       case 'arewepluginsyet':
         return onPluginsSlashCommand(interaction);
+      case 'lint-rule':
+        return onLintRuleSlashCommand(interaction);
       case 'supported-languages':
         return onSupportedLanguagesSlashCommand(interaction);
       case 'test':
         return onTestSlashCommand(interaction);
+    }
+  }
+
+  if (isAutocomplete(interaction)) {
+    switch (interaction.data.name) {
+      case 'lint-rule':
+        return onLintRuleAutocomplete(interaction);
     }
   }
 

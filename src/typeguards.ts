@@ -1,4 +1,5 @@
 import {
+  type APIApplicationCommandAutocompleteInteraction,
   type APIApplicationCommandInteraction,
   type APIChatInputApplicationCommandInteraction,
   type APIInteraction,
@@ -10,6 +11,12 @@ import {
 
 export function isApplicationCommand(interaction: APIInteraction): interaction is APIApplicationCommandInteraction {
   return interaction.type === InteractionType.ApplicationCommand;
+}
+
+export function isAutocomplete(
+  interaction: APIInteraction,
+): interaction is APIApplicationCommandAutocompleteInteraction {
+  return interaction.type === InteractionType.ApplicationCommandAutocomplete;
 }
 
 export function isChatInputCommand(
