@@ -1,4 +1,8 @@
-import type { APIInteractionResponseCallbackData, InteractionResponseType } from 'discord-api-types/v10';
+import type {
+  APICommandAutocompleteInteractionResponseCallbackData,
+  APIInteractionResponseCallbackData,
+  InteractionResponseType,
+} from 'discord-api-types/v10';
 
 function respond(value: unknown) {
   const json = JSON.stringify(value);
@@ -9,6 +13,9 @@ function respond(value: unknown) {
   });
 }
 
-export function reply(type: InteractionResponseType, data?: APIInteractionResponseCallbackData) {
+export function reply(
+  type: InteractionResponseType,
+  data?: APIInteractionResponseCallbackData | APICommandAutocompleteInteractionResponseCallbackData,
+) {
   return respond({ type, data });
 }
