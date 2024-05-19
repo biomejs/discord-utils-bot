@@ -11,7 +11,7 @@ export async function onSupportedLanguagesSlashCommand(interaction: APIApplicati
     ### ⚠️ Partial Support
     [Astro, Vue, Svelte](<https://github.com/biomejs/biome/issues/1719>) (Embedded JS only)
     ### ⏳ Working on it!
-    [CSS](<https://github.com/biomejs/biome/issues/1285>), [GraphQL](<https://github.com/biomejs/biome/issues/1927>)\*
+    [CSS](<https://github.com/biomejs/biome/issues/1285>), [GraphQL](<https://github.com/biomejs/biome/issues/1927>)\*, [YAML](<https://github.com/biomejs/biome/issues/2365>)\*
     ### ❓ Not yet
     HTML, Markdown
     Astro, Vue, Svelte (Full language support)
