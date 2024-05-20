@@ -6,12 +6,12 @@ import {
   ApplicationCommandOptionType,
   InteractionResponseType,
 } from 'discord-api-types/v10';
-import kebabCase from 'lodash.kebabcase';
 import { reply } from '../reply.js';
 
 interface Rule {
   name: string;
   version: string;
+  link: string;
   recommended: boolean;
   deprecated: boolean;
   fixKind?: 'safe' | 'unsafe';
@@ -55,7 +55,7 @@ export async function onLintRuleSlashCommand(interaction: APIChatInputApplicatio
       ${ruleData.fixKind ? `\nFix kind: ${ruleData.fixKind}\n` : ''}
       -${ruleData.docs.split('\n\n')[0]}
 
-      Docs: <https://biomejs.dev/linter/rules/${kebabCase(ruleData.name)}>
+      Docs: <${ruleData.link}>
     `,
   });
 }
