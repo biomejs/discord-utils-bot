@@ -48,9 +48,10 @@ export async function onLintRuleSlashCommand(interaction: APIChatInputApplicatio
     });
   }
 
+  const release = ruleData.version === 'next' ? 'unreleased' : `since \`v${ruleData.version}\``;
   return reply(InteractionResponseType.ChannelMessageWithSource, {
     content: dedent`
-      ## ${ruleData.name} (since \`v${ruleData.version}\`)
+      ## ${ruleData.name} (${release})
       ${ruleData.recommended ? '🌟 Recommended' : ''}${ruleData.deprecated ? '⚠️ Deprecated' : ''}
       ${ruleData.fixKind ? `\nFix kind: ${ruleData.fixKind}\n` : ''}
       -${ruleData.docs.split('\n\n')[0]}
@@ -85,7 +86,7 @@ export async function onLintRuleAutocomplete(interaction: APIApplicationCommandA
 
   return reply(InteractionResponseType.ApplicationCommandAutocompleteResult, {
     choices: rules.map((r) => ({
-      name: r.name,
+      name: r.version === 'next' ? `${r.name} (unreleased)` : r.name,
       value: r.name,
     })),
   });
