@@ -13,8 +13,7 @@ jobs:
         uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4.1.6
 
       - name: Setup Biome
-        # uses: biomejs/setup-biome@2b2c8ac2a6846c3a5607664ce19af3318c6766fe # v2.2.0
-        uses: biomejs/setup-biome@main
+        uses: biomejs/setup-biome@1cbe33ead22c7a2fded3b52fa2893611c815c9b5 # v2.2.1
 
       - name: Run Biome
         run: biome ci .
