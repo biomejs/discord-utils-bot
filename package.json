@@ -18,7 +18,7 @@
   "devDependencies": {
     "@biomejs/biome": "^1.7.3",
     "@cloudflare/workers-types": "^4.20240512.0",
-    "tsx": "^4.10.5",
+    "tsx": "^4.11.0",
     "typescript": "^5.4.5",
     "wrangler": "^3.57.1"
   },
@@ -26,7 +26,7 @@
     "@discordjs/builders": "^1.8.1",
     "@discordjs/rest": "^2.3.0",
     "dedent": "^1.5.3",
-    "discord-api-types": "^0.37.84",
+    "discord-api-types": "^0.37.85",
     "discord-verify": "^1.2.0"
   },
   "engines": {
