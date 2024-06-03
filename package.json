@@ -17,16 +17,16 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.7.3",
-    "@cloudflare/workers-types": "^4.20240512.0",
-    "tsx": "^4.11.0",
+    "@cloudflare/workers-types": "^4.20240529.0",
+    "tsx": "^4.11.1",
     "typescript": "^5.4.5",
-    "wrangler": "^3.57.1"
+    "wrangler": "^3.58.0"
   },
   "dependencies": {
-    "@discordjs/builders": "^1.8.1",
+    "@discordjs/builders": "^1.8.2",
     "@discordjs/rest": "^2.3.0",
     "dedent": "^1.5.3",
-    "discord-api-types": "^0.37.85",
+    "discord-api-types": "^0.37.86",
     "discord-verify": "^1.2.0"
   },
   "engines": {
