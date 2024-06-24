@@ -16,17 +16,17 @@
     "typecheck": "tsc"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.8.1",
-    "@cloudflare/workers-types": "^4.20240614.0",
-    "tsx": "^4.15.6",
-    "typescript": "^5.4.5",
-    "wrangler": "^3.60.3"
+    "@biomejs/biome": "^1.8.2",
+    "@cloudflare/workers-types": "^4.20240620.0",
+    "tsx": "^4.15.7",
+    "typescript": "^5.5.2",
+    "wrangler": "^3.61.0"
   },
   "dependencies": {
     "@discordjs/builders": "^1.8.2",
     "@discordjs/rest": "^2.3.0",
     "dedent": "^1.5.3",
-    "discord-api-types": "^0.37.89",
+    "discord-api-types": "^0.37.90",
     "discord-verify": "^1.2.0"
   },
   "engines": {
