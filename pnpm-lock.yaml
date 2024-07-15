@@ -26,8 +26,8 @@ devDependencies:
     specifier: ^1.8.3
     version: 1.8.3
   '@cloudflare/workers-types':
-    specifier: ^4.20240620.0
-    version: 4.20240620.0
+    specifier: ^4.20240712.0
+    version: 4.20240712.0
   tsx:
     specifier: ^4.16.2
     version: 4.16.2
@@ -35,8 +35,8 @@ devDependencies:
     specifier: ^5.5.3
     version: 5.5.3
   wrangler:
-    specifier: ^3.63.1
-    version: 3.63.1(@cloudflare/workers-types@4.20240620.0)
+    specifier: ^3.64.0
+    version: 3.64.0(@cloudflare/workers-types@4.20240712.0)
 
 packages:
 
@@ -180,8 +180,8 @@ packages:
     dev: true
     optional: true
 
-  /@cloudflare/workers-types@4.20240620.0:
-    resolution: {integrity: sha512-CQD8YS6evRob7LChvIX3gE3zYo0KVgaLDOu1SwNP1BVIS2Sa0b+FC8S1e1hhrNN8/E4chYlVN+FDAgA4KRDUEQ==}
+  /@cloudflare/workers-types@4.20240712.0:
+    resolution: {integrity: sha512-C+C0ZnkRrxR2tPkZKAXwBsWEse7bWaA7iMbaG6IKaxaPTo/5ilx7Ei3BkI2izxmOJMsC05VS1eFUf95urXzhmw==}
     dev: true
 
   /@cspotcode/source-map-support@0.8.1:
@@ -224,7 +224,7 @@ packages:
       '@discordjs/util': 1.1.0
       '@sapphire/async-queue': 1.5.2
       '@sapphire/snowflake': 3.5.3
-      '@vladfrangu/async_event_emitter': 2.4.1
+      '@vladfrangu/async_event_emitter': 2.4.3
       discord-api-types: 0.37.83
       magic-bytes.js: 1.10.0
       tslib: 2.6.3
@@ -669,15 +669,15 @@ packages:
     engines: {node: '>=6.0.0'}
     dev: true
 
-  /@jridgewell/sourcemap-codec@1.4.15:
-    resolution: {integrity: sha512-eF2rxCRulEKXHTRiDrDy6erMYWqNw4LPdQ8UQA4huuxaQsVeRPFl2oM8oDGxMFhJUWZf9McpLtJasDDZb/Bpeg==}
+  /@jridgewell/sourcemap-codec@1.5.0:
+    resolution: {integrity: sha512-gv3ZRaISU3fjPAgNsriBRqGWQL6quFx04YMPW/zD8XMLsU32mhCCbfbO6KZFLjvYpCZ8zyDEgqsgf+PwPaM7GQ==}
     dev: true
 
   /@jridgewell/trace-mapping@0.3.9:
     resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
-      '@jridgewell/sourcemap-codec': 1.4.15
+      '@jridgewell/sourcemap-codec': 1.5.0
     dev: true
 
   /@sapphire/async-queue@1.5.2:
@@ -771,8 +771,8 @@ packages:
       '@types/send': 0.17.4
     dev: false
 
-  /@vladfrangu/async_event_emitter@2.4.1:
-    resolution: {integrity: sha512-cedU1DrzO4oliUigSAOqSgts6wEfGGSbpO1hYxvKbz8sr7a0meyP3GxnL6hIUtBK0nMG6zHfIYWcqOIb+MRI7w==}
+  /@vladfrangu/async_event_emitter@2.4.3:
+    resolution: {integrity: sha512-wn15EJHUk2RDtCw6wVJndUhFbfJYwyNhSD9s+yiQi5c2MmXDy3KLWvZ5LrcOzt3CHdscoAnaJrxIRKBI1QQgGw==}
     engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
     dev: false
 
@@ -1309,8 +1309,8 @@ packages:
       '@cloudflare/workerd-windows-64': 1.20240701.0
     dev: true
 
-  /wrangler@3.63.1(@cloudflare/workers-types@4.20240620.0):
-    resolution: {integrity: sha512-fxMPNEyDc9pZNtQOuYqRikzv6lL5eP4S1zv7L/kw24uu1cCEmJ39j8bfJGzrAEqKDNsiFXVjEka0RjlpgEVWPg==}
+  /wrangler@3.64.0(@cloudflare/workers-types@4.20240712.0):
+    resolution: {integrity: sha512-q2VQADJXzuOkXs9KIfPSx7UCZHBoxsqSNbJDLkc2pHpGmsyNQXsJRqjMoTg/Kls7O3K9A7EGnzGr7+Io2vE6AQ==}
     engines: {node: '>=16.17.0'}
     hasBin: true
     peerDependencies:
@@ -1320,7 +1320,7 @@ packages:
         optional: true
     dependencies:
       '@cloudflare/kv-asset-handler': 0.3.4
-      '@cloudflare/workers-types': 4.20240620.0
+      '@cloudflare/workers-types': 4.20240712.0
       '@esbuild-plugins/node-globals-polyfill': 0.2.3(esbuild@0.17.19)
       '@esbuild-plugins/node-modules-polyfill': 0.2.2(esbuild@0.17.19)
       blake3-wasm: 2.1.5
