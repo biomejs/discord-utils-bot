@@ -17,10 +17,10 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.8.3",
-    "@cloudflare/workers-types": "^4.20240620.0",
+    "@cloudflare/workers-types": "^4.20240712.0",
     "tsx": "^4.16.2",
     "typescript": "^5.5.3",
-    "wrangler": "^3.63.1"
+    "wrangler": "^3.64.0"
   },
   "dependencies": {
     "@discordjs/builders": "^1.8.2",
