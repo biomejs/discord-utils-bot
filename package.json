@@ -7,12 +7,11 @@
   "scripts": {
     "dev": "wrangler dev",
     "start": "wrangler dev",
-    "deploy": "wrangler deploy",
     "deploy-commands": "tsx --env-file=.dev.vars scripts/deploy-commands.ts",
-    "check": "biome check .",
-    "check:apply": "biome check --apply-unsafe .",
-    "format": "biome format --write .",
-    "lint": "biome lint .",
+    "check": "biome check",
+    "check:apply": "biome check --fix --unsafe",
+    "format": "biome format --write",
+    "lint": "biome lint",
     "typecheck": "tsc"
   },
   "devDependencies": {
@@ -30,7 +29,7 @@
     "discord-verify": "^1.2.0"
   },
   "engines": {
-    "node": "^20.11.0 || >=21.2.0"
+    "node": ">=22.0.0"
   },
   "packageManager": "pnpm@9.6.0"
 }

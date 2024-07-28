@@ -22,10 +22,10 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@fe02b34f77f8bc703788d5817da081398fad5dd2 # v4.0.0
 
-      - name: Install Node 20
+      - name: Install Node 22
         uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b # v4.0.3
         with:
-          node-version: 20
+          node-version: 22
           cache: 'pnpm'
 
       - name: Install dependencies
@@ -35,7 +35,7 @@ jobs:
         run: touch .dev.vars
 
       - name: Deploy commands to Discord
-        run: pnpm run deploy-commands
+        run: node --run deploy-commands
         env:
           APPLICATION_ID: ${{ secrets.APPLICATION_ID }}
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
