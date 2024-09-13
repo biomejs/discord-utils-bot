@@ -2,6 +2,7 @@ import { type APIInteraction, InteractionResponseType } from 'discord-api-types/
 import { PlatformAlgorithm, isValidRequest } from 'discord-verify';
 import { onPluginsSlashCommand } from './commands/arewepluginsyet.js';
 import { onLintRuleAutocomplete, onLintRuleSlashCommand } from './commands/lint-rule.js';
+import { onReproductionSlashCommand } from './commands/reproduction.js';
 import { onSupportedLanguagesSlashCommand } from './commands/supported-languages.js';
 import { onTestSlashCommand } from './commands/test.js';
 import { handleGitHubWebhook } from './gh-webhook/github.js';
@@ -50,6 +51,8 @@ async function handleInteraction(request: Request, env: Env): Promise<Response> 
         return onPluginsSlashCommand(interaction);
       case 'lint-rule':
         return onLintRuleSlashCommand(interaction);
+      case 'reproduction':
+        return onReproductionSlashCommand(interaction);
       case 'supported-languages':
         return onSupportedLanguagesSlashCommand(interaction);
       case 'test':
