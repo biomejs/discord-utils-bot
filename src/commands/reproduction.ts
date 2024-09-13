@@ -26,4 +26,4 @@ export async function onReproductionSlashCommand(interaction: APIApplicationComm
 
 export const slashCommandData = new SlashCommandBuilder()
   .setName('reproduction')
-  .setDescription('Ask for a reproduction');
+  .setDescription('Ask for a minimal reproduction');
