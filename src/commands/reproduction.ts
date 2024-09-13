@@ -11,8 +11,8 @@ export async function onReproductionSlashCommand(interaction: APIApplicationComm
     If possible, please provide a link to a minimal reproduction of your issue. You can either use our
     playground or create a minimal reproduction repository.
 
-    - [Create reproduction on the Playground](<https://biomejs.dev/playground/>)
-    - Create reproduction repository: \`npm create @biomejs/biome-reproduction\`
+    - [Create a reproduction on the Playground](<https://biomejs.dev/playground/>)
+    - Create a reproduction repository: \`npm create @biomejs/biome-reproduction\`
 
     **Why it's important**
 
