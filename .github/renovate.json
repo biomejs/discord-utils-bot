@@ -3,6 +3,7 @@
   "timezone": "Europe/Gibraltar",
   "schedule": ["before 9am on monday"],
   "extends": [
+    ":preserveSemverRanges",
     "config:best-practices",
     "customManagers:biomeVersions",
     "group:allNonMajor",
