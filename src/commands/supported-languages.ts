@@ -7,13 +7,12 @@ export async function onSupportedLanguagesSlashCommand(interaction: APIApplicati
   return reply(InteractionResponseType.ChannelMessageWithSource, {
     content: dedent`
     ### ✅ Full Support
-    JavaScript, TypeScript, JSX, JSON, JSONC
+    JavaScript, TypeScript, JSX, JSON, JSONC, CSS, GraphQL
     ### ⚠️ Partial Support
     [Astro, Vue, Svelte](<https://github.com/biomejs/biome/issues/1719>) (Embedded JS only)
     ### ⏳ Working on it!
-    [CSS](<https://github.com/biomejs/biome/issues/1285>), [GraphQL](<https://github.com/biomejs/biome/issues/1927>)\*, [YAML](<https://github.com/biomejs/biome/issues/2365>)\*
+    HTML, [YAML](<https://github.com/biomejs/biome/issues/2365>)\*, Markdown
     ### ❓ Not yet
-    HTML, Markdown
     Astro, Vue, Svelte (Full language support)
 
     \*Community contribution
