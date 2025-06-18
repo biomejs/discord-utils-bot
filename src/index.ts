@@ -1,5 +1,5 @@
 import { type APIInteraction, InteractionResponseType } from 'discord-api-types/v10';
-import { PlatformAlgorithm, isValidRequest } from 'discord-verify';
+import { isValidRequest, PlatformAlgorithm } from 'discord-verify';
 import { onPluginsSlashCommand } from './commands/arewepluginsyet.js';
 import { onLintRuleAutocomplete, onLintRuleSlashCommand } from './commands/lint-rule.js';
 import { onReproductionSlashCommand } from './commands/reproduction.js';
@@ -16,7 +16,7 @@ export type Env = {
 };
 
 export default {
-  async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+  async fetch(request: Request, env: Env, _ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
 
     // Route requests based on the URL path
@@ -68,7 +68,7 @@ async function handleInteraction(request: Request, env: Env): Promise<Response> 
   }
 
   if (isMessageComponent(interaction)) {
-    const [name] = interaction.data.custom_id.split(':');
+    const [_name] = interaction.data.custom_id.split(':');
     // add things here
   }
 

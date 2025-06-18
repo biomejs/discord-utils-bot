@@ -3,7 +3,7 @@ import dedent from 'dedent';
 import { type APIApplicationCommandInteraction, InteractionResponseType } from 'discord-api-types/v10';
 import { reply } from '../reply.js';
 
-export async function onSupportedLanguagesSlashCommand(interaction: APIApplicationCommandInteraction) {
+export async function onSupportedLanguagesSlashCommand(_interaction: APIApplicationCommandInteraction) {
   return reply(InteractionResponseType.ChannelMessageWithSource, {
     content: dedent`
     ### ✅ Full Support

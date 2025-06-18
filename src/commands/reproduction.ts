@@ -3,7 +3,7 @@ import dedent from 'dedent';
 import { type APIApplicationCommandInteraction, InteractionResponseType } from 'discord-api-types/v10';
 import { reply } from '../reply';
 
-export async function onReproductionSlashCommand(interaction: APIApplicationCommandInteraction) {
+export async function onReproductionSlashCommand(_interaction: APIApplicationCommandInteraction) {
   return reply(InteractionResponseType.ChannelMessageWithSource, {
     content: dedent`
     🙏 **Please provide a minimal reproduction**

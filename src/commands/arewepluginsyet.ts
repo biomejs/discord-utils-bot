@@ -1,9 +1,15 @@
 import { SlashCommandBuilder } from '@discordjs/builders';
 import dedent from 'dedent';
-import { ButtonStyle, ComponentType, InteractionResponseType, MessageFlags } from 'discord-api-types/v10';
+import {
+  type APIApplicationCommandInteraction,
+  ButtonStyle,
+  ComponentType,
+  InteractionResponseType,
+  MessageFlags,
+} from 'discord-api-types/v10';
 import { reply } from '../reply.js';
 
-export async function onPluginsSlashCommand() {
+export async function onPluginsSlashCommand(_interaction: APIApplicationCommandInteraction) {
   return reply(InteractionResponseType.ChannelMessageWithSource, {
     flags: MessageFlags.IsComponentsV2,
     components: [
@@ -35,6 +41,7 @@ export async function onPluginsSlashCommand() {
         type: ComponentType.TextDisplay,
         content: dedent`
           These plugins are still limited in scope: They only allow you to match code snippets and report diagnostics on them.
+
           Want to contribute? See the umbrella issue: <https://github.com/biomejs/biome/issues/2463>
         `,
       },
