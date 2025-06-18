@@ -22,17 +22,14 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
 
-      - name: Install Node 22
+      - name: Install Node 24
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
-          node-version: 22
+          node-version: 24
           cache: 'pnpm'
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-
-      - name: Create empty .dev.vars file
-        run: touch .dev.vars
 
       - name: Deploy commands to Discord
         run: node --run deploy-commands
@@ -40,19 +37,11 @@ jobs:
           APPLICATION_ID: ${{ secrets.APPLICATION_ID }}
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
 
-      # The wrangler action normally installs a hardcoded version of wrangler.
-      # This step gets the version we use from package.json.
-      # See https://github.com/cloudflare/wrangler-action/issues/231#issuecomment-1976018383.
-      - name: Set wrangler version
-        id: wrangler
-        run: echo "version=$(jq -r .devDependencies.wrangler package.json | cut -c2-)" >> "$GITHUB_OUTPUT"
-
       - name: Build & Deploy Worker
         uses: cloudflare/wrangler-action@da0e0dfe58b7a431659754fdf3f186c529afbe65 # v3.14.1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          wranglerVersion: ${{ steps.wrangler.outputs.version }}
           secrets: |
             DISCORD_WEBHOOK
             PUBLIC_KEY

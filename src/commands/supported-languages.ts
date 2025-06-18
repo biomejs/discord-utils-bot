@@ -1,7 +1,7 @@
 import { SlashCommandBuilder } from '@discordjs/builders';
 import dedent from 'dedent';
 import { type APIApplicationCommandInteraction, InteractionResponseType } from 'discord-api-types/v10';
-import { reply } from '../reply.js';
+import { reply } from '../reply.ts';
 
 export async function onSupportedLanguagesSlashCommand(_interaction: APIApplicationCommandInteraction) {
   return reply(InteractionResponseType.ChannelMessageWithSource, {

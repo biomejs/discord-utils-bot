@@ -6,7 +6,7 @@ import {
   ApplicationCommandOptionType,
   InteractionResponseType,
 } from 'discord-api-types/v10';
-import { reply } from '../reply.js';
+import { reply } from '../reply.ts';
 
 interface Rule {
   name: string;

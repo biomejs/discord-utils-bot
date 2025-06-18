@@ -7,7 +7,7 @@ import {
   InteractionResponseType,
   MessageFlags,
 } from 'discord-api-types/v10';
-import { reply } from '../reply.js';
+import { reply } from '../reply.ts';
 
 export async function onPluginsSlashCommand(_interaction: APIApplicationCommandInteraction) {
   return reply(InteractionResponseType.ChannelMessageWithSource, {

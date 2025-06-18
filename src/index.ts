@@ -1,13 +1,13 @@
 import { type APIInteraction, InteractionResponseType } from 'discord-api-types/v10';
 import { isValidRequest, PlatformAlgorithm } from 'discord-verify';
-import { onPluginsSlashCommand } from './commands/arewepluginsyet.js';
-import { onLintRuleAutocomplete, onLintRuleSlashCommand } from './commands/lint-rule.js';
-import { onReproductionSlashCommand } from './commands/reproduction.js';
-import { onSupportedLanguagesSlashCommand } from './commands/supported-languages.js';
-import { onTestSlashCommand } from './commands/test.js';
-import { handleGitHubWebhook } from './gh-webhook/github.js';
-import { reply } from './reply.js';
-import { isAutocomplete, isChatInputCommand, isMessageComponent, isPing } from './typeguards.js';
+import { onPluginsSlashCommand } from './commands/arewepluginsyet.ts';
+import { onLintRuleAutocomplete, onLintRuleSlashCommand } from './commands/lint-rule.ts';
+import { onReproductionSlashCommand } from './commands/reproduction.ts';
+import { onSupportedLanguagesSlashCommand } from './commands/supported-languages.ts';
+import { onTestSlashCommand } from './commands/test.ts';
+import { handleGitHubWebhook } from './gh-webhook/github.ts';
+import { reply } from './reply.ts';
+import { isAutocomplete, isChatInputCommand, isMessageComponent, isPing } from './typeguards.ts';
 
 export type Env = {
   PUBLIC_KEY: string;

@@ -7,6 +7,7 @@
     "target": "esnext",
 
     "types": ["@cloudflare/workers-types"],
+    "allowImportingTsExtensions": true,
     "esModuleInterop": true,
     "checkJs": true,
     "resolveJsonModule": true,
@@ -14,6 +15,7 @@
     "skipLibCheck": true,
 
     "noEmit": true,
+    "erasableSyntaxOnly": true,
     "verbatimModuleSyntax": true
   }
 }

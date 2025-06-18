@@ -13,7 +13,7 @@
 
 ### Installation
 
-If you haven't already, install [Node.js](https://nodejs.org) `22.0.0` or later.
+If you haven't already, install [Node.js](https://nodejs.org) `24.0.0` or later.
 
 Afterwards, install `pnpm` by running `corepack enable`.
 
@@ -54,7 +54,7 @@ Create a new file in the `src/commands` directory, with the following structure 
 ```ts
 import { SlashCommandBuilder } from '@discordjs/builders';
 import { type APIApplicationCommandInteraction, InteractionResponseType } from 'discord-api-types/v10';
-import { reply } from '../reply.js';
+import { reply } from '../reply.ts';
 
 export async function onXSlashCommand(interaction: APIApplicationCommandInteraction) {
   return reply(InteractionResponseType.ChannelMessageWithSource, {
