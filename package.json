@@ -15,7 +15,7 @@
     "typecheck": "tsc"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.9.4",
+    "@biomejs/biome": "^2.0.0",
     "@cloudflare/workers-types": "^4.20250617.0",
     "tsx": "^4.20.3",
     "typescript": "^5.8.3",
