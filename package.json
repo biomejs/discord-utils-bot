@@ -16,15 +16,15 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.0.6",
-    "@cloudflare/workers-types": "^4.20250627.0",
+    "@cloudflare/workers-types": "^4.20250705.0",
     "typescript": "^5.8.3",
-    "wrangler": "^4.22.0"
+    "wrangler": "^4.23.0"
   },
   "dependencies": {
     "@discordjs/builders": "^1.11.2",
     "@discordjs/rest": "^2.5.1",
     "dedent": "^1.6.0",
-    "discord-api-types": "^0.38.13",
+    "discord-api-types": "^0.38.15",
     "discord-verify": "^1.2.0"
   },
   "engines": {
