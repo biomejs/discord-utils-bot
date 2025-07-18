@@ -105,7 +105,8 @@ async function sendToWebhook(body: string, headers: Headers, webhookUrl: string)
     });
 
     return response.ok;
-  } catch {
+  } catch (e) {
+    console.error('Error sending to discord webhook:', e);
     return false;
   }
 }
