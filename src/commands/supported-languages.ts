@@ -1,24 +1,54 @@
 import { SlashCommandBuilder } from '@discordjs/builders';
 import dedent from 'dedent';
-import { type APIApplicationCommandInteraction, InteractionResponseType } from 'discord-api-types/v10';
+import {
+  type APIApplicationCommandInteraction,
+  ComponentType,
+  InteractionResponseType,
+  MessageFlags,
+} from 'discord-api-types/v10';
 import { reply } from '../reply.ts';
 
 export async function onSupportedLanguagesSlashCommand(_interaction: APIApplicationCommandInteraction) {
   return reply(InteractionResponseType.ChannelMessageWithSource, {
-    content: dedent`
-    ### ✅ Full Support
-    JavaScript, TypeScript, JSX, JSON, JSONC, CSS, GraphQL
-    ### ⚠️ Partial Support
-    [Astro, Vue, Svelte](<https://github.com/biomejs/biome/issues/1719>) (Embedded JS only), GritQL
-    ### ⏳ Working on it!
-    HTML, [YAML](<https://github.com/biomejs/biome/issues/2365>)\*, Markdown
-    ### ❓ Not yet
-    Astro, Vue, Svelte (Full language support)
-
-    \*Community contribution
-
-    For more info check <https://biomejs.dev/internals/language-support>
-    `,
+    flags: MessageFlags.IsComponentsV2,
+    components: [
+      {
+        type: ComponentType.TextDisplay,
+        content: dedent`
+          ### ✅ Full Support
+          JavaScript, TypeScript, JSX, JSON, HTML, JSONC, CSS, GraphQL, GritQL
+        `,
+      },
+      {
+        type: ComponentType.Separator,
+      },
+      {
+        type: ComponentType.TextDisplay,
+        content: dedent`
+          ### 🟡 Experimental
+          [Vue, Svelte, Astro](<https://biomejs.dev/internals/language-support/#html-super-languages-support>)
+        `,
+      },
+      {
+        type: ComponentType.Separator,
+      },
+      {
+        type: ComponentType.TextDisplay,
+        content: dedent`
+          ### ⏳ Working on it!
+          [YAML](<https://github.com/biomejs/biome/issues/2365>), [Markdown](<https://github.com/biomejs/biome/issues/3718>)
+        `,
+      },
+      {
+        type: ComponentType.Separator,
+      },
+      {
+        type: ComponentType.TextDisplay,
+        content: dedent`
+          *For more info check out <https://biomejs.dev/internals/language-support>*
+        `,
+      },
+    ],
   });
 }
 
