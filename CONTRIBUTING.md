@@ -33,9 +33,13 @@ Then, create a `.dev.vars` file at the root of the project with the following va
 APPLICATION_ID=
 DISCORD_TOKEN=
 DISCORD_WEBHOOK=
+DISCORD_WORKFLOW_WEBHOOK=
 PUBLIC_KEY=
 WEBHOOK_SECRET=
 ```
+
+- `DISCORD_WEBHOOK`: Discord webhook URL with `/github` appended, used for forwarding raw GitHub events (push, PR, issues).
+- `DISCORD_WORKFLOW_WEBHOOK`: Discord webhook URL (no `/github` suffix) pointing to the channel for CI/workflow notifications.
 
 ### Running the Bot
 
@@ -46,6 +50,14 @@ You can do that by running `node --run deploy-commands`.
 Once that's done, you can run the bot locally with `node --run dev`.
 
 You need to forward the port used, and specify it in the dev portal as the interactions endpoint URL.
+
+## Running Tests
+
+Run the unit tests with:
+
+```shell
+node --run test
+```
 
 ## Adding Commands
 

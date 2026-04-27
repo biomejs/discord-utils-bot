@@ -1,4 +1,6 @@
+import type { APIEmbed } from 'discord-api-types/v10';
 import type { Env } from '..';
+import { buildWorkflowRunEmbed, type WorkflowRunPayload } from './workflow-embed.ts';
 
 export async function handleGitHubWebhook(request: Request, env: Env): Promise<Response> {
   if (request.method !== 'POST') {
@@ -29,6 +31,29 @@ export async function handleGitHubWebhook(request: Request, env: Env): Promise<R
     json = JSON.parse(bodyText);
   } catch {
     return new Response('Failed to parse request body', { status: 400 });
+  }
+
+  const eventType = request.headers.get('X-GitHub-Event');
+
+  if (eventType === 'workflow_run') {
+    const workflowWebhookUrl = env.DISCORD_WORKFLOW_WEBHOOK;
+    if (!workflowWebhookUrl) {
+      return new Response('Workflow webhook not configured', { status: 500 });
+    }
+
+    const payload = json as WorkflowRunPayload;
+    if (payload.action !== 'completed' && payload.action !== 'in_progress') {
+      return new Response('Skipped workflow_run action', { status: 200 });
+    }
+
+    const embed = buildWorkflowRunEmbed(payload);
+    const sent = await sendEmbedToWebhook(embed, workflowWebhookUrl);
+
+    if (!sent) {
+      return new Response('Failed to send workflow embed to Discord', { status: 500 });
+    }
+
+    return new Response('Workflow event processed', { status: 200 });
   }
 
   const isHuman = await isHumanEvent(json);
@@ -86,6 +111,20 @@ async function isHumanEvent(json: unknown): Promise<boolean> {
     typeof json.sender.type === 'string' &&
     json.sender.type === 'User'
   );
+}
+
+async function sendEmbedToWebhook(embed: APIEmbed, webhookUrl: string): Promise<boolean> {
+  try {
+    const response = await fetch(`${webhookUrl}?wait=true`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ embeds: [embed] }),
+    });
+    return response.ok;
+  } catch (e) {
+    console.error('Error sending workflow embed to Discord:', e);
+    return false;
+  }
 }
 
 async function sendToWebhook(body: string, headers: Headers, webhookUrl: string): Promise<boolean> {

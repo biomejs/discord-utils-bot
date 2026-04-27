@@ -12,6 +12,7 @@ import { isAutocomplete, isChatInputCommand, isMessageComponent, isPing } from '
 export type Env = {
   PUBLIC_KEY: string;
   DISCORD_WEBHOOK: string;
+  DISCORD_WORKFLOW_WEBHOOK: string;
   WEBHOOK_SECRET: string;
 };
 
