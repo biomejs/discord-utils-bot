@@ -12,12 +12,15 @@
     "check:apply": "biome check --fix --unsafe",
     "format": "biome format --write",
     "lint": "biome lint",
+    "test": "vitest run",
     "typecheck": "tsc"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.10",
     "@cloudflare/workers-types": "^4.20260405.1",
+    "@octokit/webhooks-types": "^7.6.1",
     "typescript": "^6.0.2",
+    "vitest": "^4.1.5",
     "wrangler": "^4.80.0"
   },
   "dependencies": {
