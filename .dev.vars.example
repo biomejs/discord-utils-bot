@@ -2,6 +2,8 @@ APPLICATION_ID=""
 DISCORD_TOKEN=""
 # make sure to append /github to the end of the webhook URL
 DISCORD_WEBHOOK=""
+# webhook URL for the private GitHub Sponsors notifications channel (no /github suffix)
+DISCORD_SPONSORS_WEBHOOK=""
 # webhook URL for the workflow notifications channel (no /github suffix)
 DISCORD_WORKFLOW_WEBHOOK=""
 PUBLIC_KEY=""

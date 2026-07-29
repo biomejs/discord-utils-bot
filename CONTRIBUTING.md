@@ -33,13 +33,18 @@ Then, create a `.dev.vars` file at the root of the project with the following va
 APPLICATION_ID=
 DISCORD_TOKEN=
 DISCORD_WEBHOOK=
+DISCORD_SPONSORS_WEBHOOK=
 DISCORD_WORKFLOW_WEBHOOK=
 PUBLIC_KEY=
 WEBHOOK_SECRET=
 ```
 
 - `DISCORD_WEBHOOK`: Discord webhook URL with `/github` appended, used for forwarding raw GitHub events (push, PR, issues).
+- `DISCORD_SPONSORS_WEBHOOK`: Discord webhook URL (no `/github` suffix) pointing to the private channel for GitHub Sponsors notifications.
 - `DISCORD_WORKFLOW_WEBHOOK`: Discord webhook URL (no `/github` suffix) pointing to the channel for CI/workflow notifications.
+
+Configure the GitHub Sponsors webhook from the sponsored account dashboard with the local or deployed
+`/github/sponsors` URL, `application/json` as its content type, and `WEBHOOK_SECRET` as its secret.
 
 ### Running the Bot
 

@@ -44,11 +44,13 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           secrets: |
             DISCORD_WEBHOOK
+            DISCORD_SPONSORS_WEBHOOK
             DISCORD_WORKFLOW_WEBHOOK
             PUBLIC_KEY
             WEBHOOK_SECRET
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          DISCORD_SPONSORS_WEBHOOK: ${{ secrets.DISCORD_SPONSORS_WEBHOOK }}
           DISCORD_WORKFLOW_WEBHOOK: ${{ secrets.DISCORD_WORKFLOW_WEBHOOK }}
           PUBLIC_KEY: ${{ secrets.PUBLIC_KEY }}
           WEBHOOK_SECRET: ${{ secrets.WEBHOOK_SECRET }}
