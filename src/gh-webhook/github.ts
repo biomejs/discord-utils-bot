@@ -1,5 +1,6 @@
 import type { APIEmbed } from 'discord-api-types/v10';
 import type { Env } from '..';
+import { verifyGitHubSignature } from './signature.ts';
 import { buildWorkflowRunEmbed, type WorkflowRunPayload } from './workflow-embed.ts';
 
 export async function handleGitHubWebhook(request: Request, env: Env): Promise<Response> {
@@ -20,7 +21,7 @@ export async function handleGitHubWebhook(request: Request, env: Env): Promise<R
     return new Response('Failed to read request body', { status: 400 });
   }
 
-  const authorized = await isAuthorized(request.headers, bodyText, githubSecret);
+  const authorized = await verifyGitHubSignature(request.headers, bodyText, githubSecret);
 
   if (!authorized) {
     return new Response('Unauthorized', { status: 401 });
@@ -69,31 +70,6 @@ export async function handleGitHubWebhook(request: Request, env: Env): Promise<R
   }
 
   return new Response('Event processed', { status: 200 });
-}
-
-async function isAuthorized(headers: Headers, bodyText: string, githubSecret: string): Promise<boolean> {
-  const untrustedSignature = headers.get('X-Hub-Signature-256');
-
-  if (untrustedSignature == null) {
-    return false;
-  }
-
-  const encoder = new TextEncoder();
-
-  const data = encoder.encode(bodyText);
-  const secret = encoder.encode(githubSecret);
-
-  const key = await crypto.subtle.importKey('raw', secret, { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
-  const signature = await crypto.subtle.sign('HMAC', key, data);
-
-  const hexSignature = Array.from(new Uint8Array(signature))
-    .map((byte) => byte.toString(16).padStart(2, '0'))
-    .join('');
-
-  const trusted = encoder.encode(`sha256=${hexSignature}`);
-  const untrusted = encoder.encode(untrustedSignature);
-
-  return crypto.subtle.timingSafeEqual(trusted, untrusted);
 }
 
 async function isHumanEvent(json: unknown): Promise<boolean> {

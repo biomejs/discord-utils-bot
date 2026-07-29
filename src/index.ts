@@ -6,12 +6,14 @@ import { onReproductionSlashCommand } from './commands/reproduction.ts';
 import { onSupportedLanguagesSlashCommand } from './commands/supported-languages.ts';
 import { onTestSlashCommand } from './commands/test.ts';
 import { handleGitHubWebhook } from './gh-webhook/github.ts';
+import { handleSponsorsWebhook } from './gh-webhook/sponsors.ts';
 import { reply } from './reply.ts';
 import { isAutocomplete, isChatInputCommand, isMessageComponent, isPing } from './typeguards.ts';
 
 export type Env = {
   PUBLIC_KEY: string;
   DISCORD_WEBHOOK: string;
+  DISCORD_SPONSORS_WEBHOOK: string;
   DISCORD_WORKFLOW_WEBHOOK: string;
   WEBHOOK_SECRET: string;
 };
@@ -24,6 +26,8 @@ export default {
     switch (url.pathname) {
       case '/github':
         return handleGitHubWebhook(request, env);
+      case '/github/sponsors':
+        return handleSponsorsWebhook(request, env);
       default:
         return handleInteraction(request, env);
     }
