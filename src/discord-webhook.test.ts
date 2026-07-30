@@ -34,4 +34,10 @@ describe('sendDiscordEmbed', () => {
 
     await expect(sendDiscordEmbed('https://discord.com/api/webhooks/test', { title: 'Test' })).resolves.toBe(false);
   });
+
+  it('returns false for a malformed webhook URL', async () => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    await expect(sendDiscordEmbed('not a URL', { title: 'Test' })).resolves.toBe(false);
+  });
 });

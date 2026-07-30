@@ -7,6 +7,7 @@ import { onSupportedLanguagesSlashCommand } from './commands/supported-languages
 import { onTestSlashCommand } from './commands/test.ts';
 import { handleGitHubWebhook } from './gh-webhook/github.ts';
 import { handleSponsorsWebhook } from './gh-webhook/sponsors.ts';
+import { handleOpenCollectiveWebhook } from './opencollective-webhook/opencollective.ts';
 import { reply } from './reply.ts';
 import { isAutocomplete, isChatInputCommand, isMessageComponent, isPing } from './typeguards.ts';
 
@@ -15,12 +16,19 @@ export type Env = {
   DISCORD_WEBHOOK: string;
   DISCORD_SPONSORS_WEBHOOK: string;
   DISCORD_WORKFLOW_WEBHOOK: string;
+  OPENCOLLECTIVE_API_TOKEN: string;
+  OPENCOLLECTIVE_WEBHOOK_TOKEN: string;
   WEBHOOK_SECRET: string;
 };
 
 export default {
   async fetch(request: Request, env: Env, _ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
+
+    const openCollectivePrefix = '/opencollective/';
+    if (url.pathname.startsWith(openCollectivePrefix)) {
+      return handleOpenCollectiveWebhook(request, env, url.pathname.slice(openCollectivePrefix.length));
+    }
 
     // Route requests based on the URL path
     switch (url.pathname) {

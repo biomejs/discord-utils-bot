@@ -1,10 +1,9 @@
 import type { APIEmbed } from 'discord-api-types/v10';
 
 export async function sendDiscordEmbed(webhookUrl: string, embed: APIEmbed): Promise<boolean> {
-  const url = new URL(webhookUrl);
-  url.searchParams.set('wait', 'true');
-
   try {
+    const url = new URL(webhookUrl);
+    url.searchParams.set('wait', 'true');
     const response = await fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
