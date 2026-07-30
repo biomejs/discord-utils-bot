@@ -1,5 +1,6 @@
 import type { SponsorshipEvent } from '@octokit/webhooks-types';
 import type { Env } from '..';
+import { sendDiscordEmbed } from '../discord-webhook.ts';
 import { verifyGitHubSignature } from './signature.ts';
 import { buildSponsorshipEmbed } from './sponsorship-embed.ts';
 
@@ -40,25 +41,8 @@ export async function handleSponsorsWebhook(request: Request, env: Env): Promise
     return new Response('Invalid sponsorship payload', { status: 400 });
   }
 
-  const webhookUrl = new URL(env.DISCORD_SPONSORS_WEBHOOK);
-  webhookUrl.searchParams.set('wait', 'true');
-
-  try {
-    const response = await fetch(webhookUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        embeds: [buildSponsorshipEmbed(payload)],
-        allowed_mentions: { parse: [] },
-      }),
-    });
-
-    if (!response.ok) {
-      console.error('Discord rejected sponsorship webhook:', response.status);
-      return new Response('Failed to send sponsorship embed to Discord', { status: 502 });
-    }
-  } catch (error) {
-    console.error('Error sending sponsorship embed to Discord:', error);
+  const sent = await sendDiscordEmbed(env.DISCORD_SPONSORS_WEBHOOK, buildSponsorshipEmbed(payload));
+  if (!sent) {
     return new Response('Failed to send sponsorship embed to Discord', { status: 502 });
   }
 

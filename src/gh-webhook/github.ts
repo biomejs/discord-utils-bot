@@ -1,5 +1,5 @@
-import type { APIEmbed } from 'discord-api-types/v10';
 import type { Env } from '..';
+import { sendDiscordEmbed } from '../discord-webhook.ts';
 import { verifyGitHubSignature } from './signature.ts';
 import { buildWorkflowRunEmbed, type WorkflowRunPayload } from './workflow-embed.ts';
 
@@ -48,7 +48,7 @@ export async function handleGitHubWebhook(request: Request, env: Env): Promise<R
     }
 
     const embed = buildWorkflowRunEmbed(payload);
-    const sent = await sendEmbedToWebhook(embed, workflowWebhookUrl);
+    const sent = await sendDiscordEmbed(workflowWebhookUrl, embed);
 
     if (!sent) {
       return new Response('Failed to send workflow embed to Discord', { status: 500 });
@@ -87,20 +87,6 @@ async function isHumanEvent(json: unknown): Promise<boolean> {
     typeof json.sender.type === 'string' &&
     json.sender.type === 'User'
   );
-}
-
-async function sendEmbedToWebhook(embed: APIEmbed, webhookUrl: string): Promise<boolean> {
-  try {
-    const response = await fetch(`${webhookUrl}?wait=true`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ embeds: [embed] }),
-    });
-    return response.ok;
-  } catch (e) {
-    console.error('Error sending workflow embed to Discord:', e);
-    return false;
-  }
 }
 
 async function sendToWebhook(body: string, headers: Headers, webhookUrl: string): Promise<boolean> {

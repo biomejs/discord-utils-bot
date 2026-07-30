@@ -8,6 +8,8 @@ const ENV: Env = {
   DISCORD_WEBHOOK: 'https://discord.com/api/webhooks/general/github',
   DISCORD_SPONSORS_WEBHOOK: 'https://discord.com/api/webhooks/sponsors?thread_id=123',
   DISCORD_WORKFLOW_WEBHOOK: 'https://discord.com/api/webhooks/workflow',
+  OPENCOLLECTIVE_API_TOKEN: 'personal-token',
+  OPENCOLLECTIVE_WEBHOOK_TOKEN: 'webhook-token',
   WEBHOOK_SECRET: 'general-secret',
 };
 

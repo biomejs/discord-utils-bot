@@ -35,16 +35,30 @@ DISCORD_TOKEN=
 DISCORD_WEBHOOK=
 DISCORD_SPONSORS_WEBHOOK=
 DISCORD_WORKFLOW_WEBHOOK=
+OPENCOLLECTIVE_API_TOKEN=
+OPENCOLLECTIVE_WEBHOOK_TOKEN=
 PUBLIC_KEY=
 WEBHOOK_SECRET=
 ```
 
 - `DISCORD_WEBHOOK`: Discord webhook URL with `/github` appended, used for forwarding raw GitHub events (push, PR, issues).
-- `DISCORD_SPONSORS_WEBHOOK`: Discord webhook URL (no `/github` suffix) pointing to the private channel for GitHub Sponsors notifications.
+- `DISCORD_SPONSORS_WEBHOOK`: Discord webhook URL (no `/github` suffix) pointing to the private channel for GitHub Sponsors and Open Collective notifications.
 - `DISCORD_WORKFLOW_WEBHOOK`: Discord webhook URL (no `/github` suffix) pointing to the channel for CI/workflow notifications.
+- `OPENCOLLECTIVE_API_TOKEN`: Personal token with the `orders` scope used to enrich subscription notifications.
+- `OPENCOLLECTIVE_WEBHOOK_TOKEN`: High-entropy token used in the Open Collective webhook URL.
 
 Configure the GitHub Sponsors webhook from the sponsored account dashboard with the local or deployed
 `/github/sponsors` URL, `application/json` as its content type, and `WEBHOOK_SECRET` as its secret.
+
+For Open Collective, create a personal token without advanced privileges and with the `orders` scope. Generate
+`OPENCOLLECTIVE_WEBHOOK_TOKEN` once with `openssl rand -hex 32`, then configure a generic webhook for the Biome
+collective with this URL:
+
+```text
+https://<worker-host>/opencollective/<OPENCOLLECTIVE_WEBHOOK_TOKEN>
+```
+
+Subscribe it to `subscription.canceled`, `subscription.paused`, and `subscription.resumed`.
 
 ### Running the Bot
 
