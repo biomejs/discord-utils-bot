@@ -17,11 +17,11 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.14",
-    "@cloudflare/workers-types": "^5.20260917.1",
+    "@cloudflare/workers-types": "^5.20260926.1",
     "@octokit/webhooks-types": "^7.6.1",
     "typescript": "^7.0.2",
-    "vitest": "^5.0.1",
-    "wrangler": "^4.133.0"
+    "vitest": "^5.0.2",
+    "wrangler": "^4.141.0"
   },
   "dependencies": {
     "@discordjs/builders": "^1.14.1",
